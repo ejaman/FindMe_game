@@ -1,0 +1,15 @@
+div {
+  width: 200px;
+  height: 200px;
+  background-color: salmon;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+.special {
+  background-color: rgb(253, 181, 173);
+}
+aside {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
