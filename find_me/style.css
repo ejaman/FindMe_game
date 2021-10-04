@@ -1,0 +1,94 @@
+body {
+  background-color: #5f6e8d;
+  text-align: center;
+  font-family: "Jua", sans-serif;
+  font-size: 80px;
+}
+.home {
+  color: #2a2f3d;
+  position: fixed;
+  font-size: 50px;
+  top: 20px;
+  right: 30px;
+}
+.logo-img {
+  height: 200px;
+  width: 220px;
+}
+
+.scoreboard {
+  margin: auto;
+  display: flex;
+  margin-bottom: 25px;
+  padding-top: 17px;
+  width: 900px;
+  height: 50px;
+  font-size: 30px;
+  font-weight: bold;
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: 10px 5px 5px rgb(66, 66, 66);
+}
+.timer {
+  margin-right: auto;
+  margin-left: 50px;
+}
+.score {
+  margin-left: auto;
+  margin-right: 50px;
+}
+
+button {
+  width: 60px;
+  height: 60px;
+  font-size: 60px;
+  border: 2px solid;
+  background: none;
+  border: none;
+  color: white;
+  transition: transform 300ms ease-in;
+}
+button:hover {
+  transform: scale(1.1);
+}
+
+.game {
+  margin: auto;
+  margin-bottom: 70px;
+  display: flex;
+  text-align: center;
+  width: 900px;
+  height: 550px;
+  border-radius: 20px;
+  background: url(img/wally.jpeg) center/cover;
+}
+
+.start-btn {
+  margin: auto;
+}
+
+.popup {
+  display: block;
+  margin: auto;
+  width: 400px;
+  height: 150px;
+  padding: 20px;
+  border-radius: 20px;
+  background-color: #e2e9f8;
+  opacity: 95%;
+  color: #596785;
+  transform: translateY(-200%);
+}
+.popup--hide {
+  display: none;
+}
+.message {
+  /* 메시지가 그 다음줄에 나오도록 */
+  display: block;
+  font-size: 38px;
+}
+.refresh {
+  font-size: 50px;
+  margin-top: 20px;
+  color: #596785;
+}

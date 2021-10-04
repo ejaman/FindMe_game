@@ -4,9 +4,44 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Find Me</title>
+  <link rel="stylesheet" href="style.css">  
+  <script type="module" src="src/main.js" defer></script> 
+  <script src="https://kit.fontawesome.com/9eb162ac0d.js" crossorigin="anonymous"></script>
+  <link rel="short icon" href="#">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 </head>
-<body>
+
+<body>  
+  <section class="title"></section>
+    <button class="home">
+      <i class="fas fa-home"></i>
+    </button>
+    Find me!
+    <img class ="logo-img" src="img/wally_c3.png">
+  </section>
+  <section class="scoreboard">
+    <span class="timer">0 초</span>
+    <span class="left">0 개</span>
+    <span class="score">5 점</span>
+  </section>
+
+  <section class="game">
+    <button class="start-btn">
+      <i class="fas fa-play-circle"></i>
+    </button>
+  </section>
+
+
+  <section class="popup popup--hide">
+    <span class="message">Restart!</span>
+    <button class="refresh">
+      <i class="fas fa-redo-alt"></i>
+    </button>
+  </section>
+
   
 </body>
 </html>
