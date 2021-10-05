@@ -12,7 +12,14 @@ startBtn.addEventListener('click', () => {
   console.log(groundRect);
   play();
   showStopbtn();
+});
+
+stopBtn.addEventListener('click',() => {
+  console.log('stop');
+  
 })
+
+
 
 // 게임이 실행되는 함수
 function play (){
