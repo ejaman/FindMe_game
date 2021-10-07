@@ -50,8 +50,13 @@ body {
   box-shadow: 10px 5px 5px rgb(66, 66, 66);
 }
 .timer {
-  margin-right: auto;
   margin-left: 50px;
+}
+.unit {
+  margin-right: auto;
+}
+.hide--unit {
+  visibility: hidden;
 }
 .score {
   margin-left: auto;
@@ -114,6 +119,7 @@ footer {
 }
 .refresh {
   font-size: 50px;
+  margin-right: 50px;
   margin-top: 20px;
   color: #596785;
 }
