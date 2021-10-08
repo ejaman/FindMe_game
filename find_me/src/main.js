@@ -1,16 +1,22 @@
 'use strict';
+const BG1 = new Audio('./sound/level1.mp3');
+const win = new Audio('./sound/game_win.mp3');
+const lose = new Audio('./sound/bug.mp3');
+const dog = new Audio('./sound/dog.mp3');
+const alert = new Audio('./sound/alert.wav');
+const click = new Audio('./sound/carrot.mp3');
 
 const img_size = 160;
 const wally_count = 1;
-const waldo_count = 2;
-const cat_count = 3;
+const waldo_count = 1;
+let dog_count = 1;
 const play_time = 5;
 
 const gameGround = document.querySelector('.ground');
 const groundRect = gameGround.getBoundingClientRect();
 const startBtn = document.querySelector('.start-btn');
-const stopBtn = document.querySelector('.stop-btn');
-const resume = document.querySelector('.resume-btn');
+const footerBtn = document.querySelector('.footer-btn');
+const resumeBtn = document.querySelector('.resume-btn');
 
 const timerBoard = document.querySelector('.timer');
 const Unit = document.querySelector('.unit');
@@ -30,64 +36,98 @@ startBtn.addEventListener('click', () => {
   Start();
 });
 // 이미지 클릭
-gameGround.addEventListener('click',(event) => {
-  const target = event.target;
-  if(target.matches('.wally') || target.matches('.waldo')){
-    target.remove();
-    score++;
-    scoreText();
-    if(score === waldo_count + wally_count){
-      Finish(true);
-    }
-  } else if ( target.matches('.cat')){
-    Finish(false);
-  }
-});
+gameGround.addEventListener('click', onGroundClick);
 // 멈춤 버튼
-stopBtn.addEventListener('click',() => {
-  showPopup('다시 시작? 돌아가기?');
-  Stop();
+footerBtn.addEventListener('click',() => {
+  if(footerBtn.innerHTML === 'stop'){
+    showPopup('다시 시작? 돌아가기?');
+    Stop();
+  }else{
+    gameGround.innerHTML = '';
+    nextlevel();
+  }
+
+  Sound(click);
 });
 
 // 있는 자리에서 다시 시작
-resume.addEventListener('click', () => {
-  showStopbtn();
+resumeBtn.addEventListener('click', () => {
+  gameGround.addEventListener('click', onGroundClick);
+  showFooterbtn('stop');
   hidePopup();
   startTimer(stringToInt(timerBoard.innerHTML));
 })
 // 처음부터 다시 시작
 popuBtn.addEventListener('click', () => {
+  gameGround.addEventListener('click', onGroundClick);
   Start();
   hidePopup();
+  Sound(alert);
+  
 })
 
 function Start(){
   play();
-  showStopbtn();
+  Sound(BG1);
+  showFooterbtn('stop');
   startTimer(play_time);
 }
 
 function Stop(){
   stopTimer();
+  stopSound(BG1);
 }
 
 function Finish(win){
   if(win){
     showPopup('💃축하합니다🕺');
+    showFooterbtn('level 2')
   }else{
     showPopup('💩재도전?💩')
   }
   stopTimer();
+  gameGround.removeEventListener('click', onGroundClick);
+}
+
+function Sound(sound){
+  sound.currentTime = 0;
+  sound.play();
+}
+function stopSound(sound){
+  sound.pause();
+}
+
+function onGroundClick(event) {
+  const target = event.target;
+  if(target.matches('.wally') || target.matches('.waldo')){
+    target.remove();
+    score++;
+    scoreText();
+    Sound(click);
+    if(score === waldo_count + wally_count){
+      Finish(true);
+      stopSound(BG1);
+      Sound(win);
+    }
+  } else if ( target.matches('.dog')){
+    Finish(false);
+    stopSound(BG1);
+    Sound(dog);
+  }
 }
 
 // 타이머 
 function startTimer(playtime){
   showunit();
+  Sound(BG1);
   timerBoard.innerHTML =`${playtime}`;
   timer = setInterval(() => {
     if(playtime <= 0){
       clearInterval(timer);
       showPopup('Time over!');
+      stopSound(BG1);
+      Sound(lose);
+      gameGround.removeEventListener('click', onGroundClick);
       return;
     }
     timerText(--playtime);
@@ -116,9 +156,18 @@ function play (){
   score = 0;
   leftBoard.innerHTML = waldo_count + wally_count;
   scoreBoard.innerHTML = '0 점'
-  createImg('cat', cat_count, 'img/cat.png');
+  createImg('dog',dog_count, 'img/dog.png');
   createImg('wally', wally_count, 'img/wally_c1.png');
   createImg('waldo', waldo_count, 'img/wally_c2.png');
+}
+
+function nextlevel(){
+  console.log('next level');  
+  dog_count = dog_count + 5;
+  Start();
+  hidePopup();
+  startTimer(); // 타이머 이상함 
+  gameGround.addEventListener('click', onGroundClick);
 }
 
 // img를 만드는 함수
@@ -143,29 +192,46 @@ function createImg (className, num, path) {
   }
 } 
 
-// 게임이 시작하면서 stop 버튼을 보여줌
-function showStopbtn(){
+// 게임이 시작하면서 아래의 버튼을 보여줌
+function showFooterbtn(footertext){
+  footerBtn.innerHTML = footertext;
   gameGround.scrollIntoView({behavior:"smooth", block: "center"});
-  stopBtn.classList.remove('hide--stop');
+  footerBtn.classList.remove('hide--footer');
 }
+
 function showPopup(text){
   msg.innerHTML = text;
   popUp.classList.remove('popup--hide');
-  hideStopbtn();
-
-}
-function showunit(){
-  Unit.classList.remove('hide--unit');
-}
-function hideStopbtn(){
-  gameGround.scrollIntoView({behavior:"smooth", block: "center"});
-  stopBtn.classList.add('hide--stop');
+  hideFooterbtn();
+  if(text === '다시 시작? 돌아가기?'){
+    showresumeBtn(true);
+  }else{
+    showresumeBtn(false);
+  }
 }
 function hidePopup(){
   popUp.classList.add('popup--hide');
 }
+function showresumeBtn(show){
+  if(show){
+    resumeBtn.classList.remove('hide--resume');
+  }else{
+    resumeBtn.classList.add('hide--resume');
+  }
+}
+function hideFooterbtn(){
+  gameGround.scrollIntoView({behavior:"smooth", block: "center"});
+  footerBtn.classList.add('hide--footer');
+}
+function showunit(){
+  Unit.classList.remove('hide--unit');
+}
+
+
 
  // position의 random을 계산해줄 함수
   function randomPosition(min, max){
     return Math.random() * (max-min) + min ;
   }
+
+

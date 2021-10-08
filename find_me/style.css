@@ -81,9 +81,9 @@ img {
   width: 80px;
   height: 160px;
 }
-.cat {
-  width: 120px;
-  height: 110px;
+.dog {
+  width: 100px;
+  height: 90px;
 }
 .start-btn {
   margin: auto;
@@ -93,7 +93,7 @@ img {
 footer {
   height: 180px;
 }
-.hide--stop {
+.hide--footer {
   display: none;
 }
 
@@ -119,12 +119,18 @@ footer {
 }
 .refresh {
   font-size: 50px;
+  margin-left: 50px;
   margin-right: 50px;
   margin-top: 20px;
   color: #596785;
 }
 .resume-btn {
   font-size: 50px;
+  margin-right: 50px;
   margin-top: 20px;
   color: #596785;
+}
+.hide--resume {
+  display: none;
+  visibility: hidden;
 }

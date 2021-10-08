@@ -1,0 +1,26 @@
+body {
+  background-color: white;
+  text-align: center;
+  font-family: "Jua", sans-serif;
+  font-size: 80px;
+}
+button {
+  font-size: 50px;
+  background: none;
+  border: none;
+  color: red;
+  border: red 5px solid;
+  border-radius: 20px;
+  transition: transform 300ms ease-in;
+  font-family: "Jua", sans-serif;
+}
+button:hover {
+  transform: scale(1.1);
+}
+.buttons {
+  margin-top: 10%;
+}
+.goToWaldo {
+  margin: auto;
+  display: block;
+}
