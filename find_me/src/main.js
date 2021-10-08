@@ -7,10 +7,10 @@ const alert = new Audio('./sound/alert.wav');
 const click = new Audio('./sound/carrot.mp3');
 
 const img_size = 160;
-const wally_count = 1;
-const waldo_count = 1;
-let dog_count = 1;
-const play_time = 5;
+const wally_count = 2;
+const waldo_count = 3;
+let dog_count = 5;
+const play_time = 10;
 
 const gameGround = document.querySelector('.ground');
 const groundRect = gameGround.getBoundingClientRect();
@@ -166,7 +166,7 @@ function nextlevel(){
   dog_count = dog_count + 5;
   Start();
   hidePopup();
-  startTimer(); // 타이머 이상함 
+  startTimer(play_time); // 타임 오버 렉 걸림
   gameGround.addEventListener('click', onGroundClick);
 }
 
