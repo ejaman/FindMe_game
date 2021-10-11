@@ -1,8 +1,14 @@
-'use strict'; // 레벨 설정도 여기서!
+'use strict'; 
+// 본 게임 실행, 레벨 설정도 여기서!
 
 import Ground from "./ground.js";
 import { ItemType } from "./ground.js";
 
+export const Reason = Object.freeze({
+  win: 'win',
+  lose: 'lose',
+  stop: 'stop'
+});
 
 //bulider pattern
 export default class GameBuilder {
@@ -10,22 +16,18 @@ export default class GameBuilder {
     this.playtime = this.playtime;
     return this;
   }
-
   wallycount(num) {
     this.wallycount = num;
     return this;
   }
-
   waldocount(num) {
     this.waldocount = num;
     return this;
   }
-
   obscount(num) {
     this.obscount = num;
     return this;
   }
-
   build(){
     return new Game(
       this.playtime,
@@ -35,7 +37,6 @@ export default class GameBuilder {
     );
   }
 }
-
 
 class Game{
   constructor(playtime, wallycount, waldocount, obscount){
@@ -62,7 +63,7 @@ class Game{
     this.footerBtn.addEventListener('click',() => {
       if(this.footerBtn.innerHTML === 'stop'){
         // popup.show('다시 시작? 돌아가기?');
-        this.Stop();
+        this.Stop(Reason.stop);
       }else{
         // gameGround.innerHTML = '';
         //nextlevel?
@@ -72,7 +73,6 @@ class Game{
 
     this.ground = new Ground(wallycount, waldocount, obscount);
     this.ground.setClickListener(this.onItemClick);
-
     this.score = 0;
     this.timer = undefined;
   }
@@ -84,12 +84,11 @@ class Game{
   Start(){
     // play();
     this.ground.play();
-    // sound.playBg();
     this.showFooterbtn('stop');
     this.startTimer(this.play_time);
   }
   
-  Stop(){
+  Stop(reason){
     this.stopTimer();
     // sound.stopBg();
     this.onGameStop && this.onGameStop(reason); 
@@ -101,11 +100,14 @@ class Game{
       this.timer_scoreText();
       if( this.score === this.waldo_count + this.wally_count){
         console.log('win');
-        // this.stop(Reason.win);
+        this.Stop(Reason.win);
       }
     }else if(item === ItemType.dog){
-      console.log('lose');
-      // this.stop(Reason.lose);
+      console.log('dog lose');
+      this.Stop(Reason.lose);
+    }else if(item === ItemType.wiz){
+      console.log('wiz lose');
+      this.Stop(Reason.lose);
     }
   }
 

@@ -29,8 +29,6 @@ export function stopBg() {
   stopSound(Bg1);
 }
 
-
-
 function Sound(sound){
   sound.currentTime = 0;
   sound.play();

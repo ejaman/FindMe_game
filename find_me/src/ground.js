@@ -1,11 +1,13 @@
 'use strict';
 // ground 클릭, 이미지의 랜덤 포지션 담당
+import * as sound from './sound.js';
 const img_size = 160;
 
 export const ItemType = Object.freeze({
   waldo: 'waldo',
   wally: 'wally',
-  dog: 'dog'
+  dog: 'dog',
+  wiz: 'wiz'
 });
 
 export default class Ground{
@@ -27,7 +29,8 @@ play (){
   // score = 0;
   // leftBoard.innerHTML = waldo_count + wally_count;
   // scoreBoard.innerHTML = '0 점'
-  this.createImg('dog',this.obs_count, 'img/dog.png');
+  this.createImg('dog', this.obs_count, 'img/dog.png');
+  this.createImg('wiz', this.obs_count, 'img/wiz.png');
   this.createImg('wally', this.wally_count, 'img/wally_c1.png');
   this.createImg('waldo', this.waldo_count, 'img/wally_c2.png');
 }
@@ -60,6 +63,7 @@ createImg (className, num, path) {
 onGroundClick = (event) => {
   const target = event.target;
   if(target.matches('.wally') || target.matches('.waldo')){
+    sound.playClick();
     target.remove();
     console.log('waldo!');
     this.onItemClick && this.onItemClick(ItemType.waldo);
@@ -73,10 +77,15 @@ onGroundClick = (event) => {
     // }
   } else if ( target.matches('.dog')){
     console.log('dog!')
+    sound.playDog();
     this.onItemClick && this.onItemClick(ItemType.dog);
     // Finish(false);
     // sound.stopBg();
     // sound.playDog();
+  } else if (target.matches('.wiz')){
+    sound.playLose();
+    console.log('wiz!')
+    this.onItemClick && this.onItemClick(ItemType.wiz);
   }
 }
 
