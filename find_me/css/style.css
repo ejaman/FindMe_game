@@ -30,6 +30,13 @@ body {
   top: 20px;
   right: 30px;
 }
+p {
+  position: fixed;
+  top: 70px;
+  right: 40px;
+  color: white;
+  font-size: 20px;
+}
 
 .logo-img {
   height: 200px;
@@ -69,7 +76,7 @@ body {
   width: 900px;
   height: 550px;
   border-radius: 20px;
-  background: url(img/wally.jpeg) center/cover;
+  background: url(../img/wally.jpeg) center/cover;
 }
 .ground {
   position: relative;
