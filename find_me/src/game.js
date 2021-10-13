@@ -3,6 +3,7 @@
 
 import * as sound from './sound.js';
 import Ground,{ ItemType } from "./ground.js";
+import PopUp from './popup.js';
 
 export const Reason = Object.freeze({
   win: 'win',
@@ -70,6 +71,7 @@ class Game{
     });
 
     this.ground = new Ground(wallycount, waldocount, obscount);
+    this.pop = new PopUp();
     this.ground.setClickListener(this.onItemClick);
     this.score = 0;
     this.timer = undefined;
@@ -86,13 +88,16 @@ class Game{
     this.showFooterbtn('stop');
     this.startTimer(this.play_time);
     this.score = 0;
+    this.scoreBoard.innerHTML = '0 점';
     this.leftBoard.innerHTML = this.waldo_count + this.wally_count;
-    this.ground.play();
   }
+  // 잠시 멈춤
   reStart(){
+    // 에러 발견 멈추고 그자리 다시시작인데 점수랑 남은 갯수는 초기화 돼 있음
     sound.playBg();
-    this.startTimer(this.stringToInt());
+    this.startTimer(this.stringToInt(this.timerBoard.innerHTML));
     this.ground.deleteEvent(false);
+    this.score = 0;
   }   
   Stop(reason){
     sound.stopBg();
@@ -101,12 +106,15 @@ class Game{
     this.onGameStop && this.onGameStop(reason); 
   }
 
-    level2(){
-    console.log('next level');  
-    // 팝업이 안보여야함
-    // 누르면 장애물과 윌리의 숫자가 늘어나야함
-    // 누르면 이미지가 움직여야함
-    // 누르면 버튼 메시지가 바뀌어야함
+  level2(){
+  console.log('next level');  
+  this.pop.hide();
+
+  // 팝업이 안보여야함 ✅ 
+  // 누르면 다시 시작되어야함 
+  // 누르면 장애물과 윌리의 숫자가 늘어나야함
+  // 누르면 이미지가 움직여야함
+  // 누르면 버튼 메시지가 바뀌어야함
   }
 
   onItemClick = (item) =>{
@@ -145,8 +153,8 @@ class Game{
   }
   
   // 멈추고 시작
-  stringToInt(){   
-    return parseInt(this.timerBoard.innerHTML);
+  stringToInt(s){   
+    return parseInt(s);
   }
   stopTimer(){
     clearInterval(this.timer);

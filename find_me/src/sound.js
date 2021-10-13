@@ -6,6 +6,7 @@ const lose = new Audio('./sound/bug.mp3');
 const dog = new Audio('./sound/dog.mp3');
 const alert = new Audio('./sound/alert.wav');
 const click = new Audio('./sound/carrot.mp3');
+const time = new Audio('./sound/time.mp3');
 
 export function playBg() {
   Sound(Bg1);
@@ -24,6 +25,9 @@ export function playAlert() {
 }
 export function playClick() {
   Sound(click);
+}
+export function playTime() {
+  Sound(time);
 }
 export function stopBg() {
   stopSound(Bg1);
