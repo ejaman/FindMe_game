@@ -1,9 +1,8 @@
 'use strict'; 
 // 본 게임 실행, 레벨 설정도 여기서!
 
-import Ground from "./ground.js";
 import * as sound from './sound.js';
-import { ItemType } from "./ground.js";
+import Ground,{ ItemType } from "./ground.js";
 
 export const Reason = Object.freeze({
   win: 'win',
@@ -62,14 +61,12 @@ class Game{
     });
     // 멈춤 버튼
     this.footerBtn.addEventListener('click',() => {
+      sound.playClick();
       if(this.footerBtn.innerHTML === 'stop'){
-        // popup.show('다시 시작? 돌아가기?');
         this.Stop(Reason.stop);
-      }else{
-        // gameGround.innerHTML = '';
-        //nextlevel?
+      }else if(this.footerBtn.innerHTML === 'level 2'){
+        this.level2();
       }
-      // sound.playClick();
     });
 
     this.ground = new Ground(wallycount, waldocount, obscount);
@@ -84,6 +81,7 @@ class Game{
 
   Start(){
     sound.playBg();
+    this.ground.deleteEvent(false);
     this.ground.play();
     this.showFooterbtn('stop');
     this.startTimer(this.play_time);
@@ -91,11 +89,24 @@ class Game{
     this.leftBoard.innerHTML = this.waldo_count + this.wally_count;
     this.ground.play();
   }
-  
+  reStart(){
+    sound.playBg();
+    this.startTimer(this.stringToInt());
+    this.ground.deleteEvent(false);
+  }   
   Stop(reason){
+    sound.stopBg();
     this.stopTimer();
-    // sound.stopBg();
+    this.ground.deleteEvent(true);
     this.onGameStop && this.onGameStop(reason); 
+  }
+
+    level2(){
+    console.log('next level');  
+    // 팝업이 안보여야함
+    // 누르면 장애물과 윌리의 숫자가 늘어나야함
+    // 누르면 이미지가 움직여야함
+    // 누르면 버튼 메시지가 바뀌어야함
   }
 
   onItemClick = (item) =>{
@@ -125,17 +136,18 @@ class Game{
       if(playtime <= 0){
         clearInterval(this.timer);
         this.Stop(Reason.timeout);
-        // this.ground.gameGround.removeEventListener('click', ground.onGroundClick);
-        // gameGround.removeEventListener('click', onGroundClick);
+        this.ground.deleteEvent(true);
+        this.hideFooterbtn();
         return;
       }
       this.timer_Text(--playtime);
     },1000);
   }
-  // stringToInt(s){   =>ground????
-  //   return parseInt(s);
-  // }
   
+  // 멈추고 시작
+  stringToInt(){   
+    return parseInt(this.timerBoard.innerHTML);
+  }
   stopTimer(){
     clearInterval(this.timer);
   }
@@ -149,19 +161,9 @@ class Game{
     this.leftBoard.innerHTML = `${this.waldo_count + this.wally_count - this.score}`
   }
   
-  
-  // nextlevel(){
-  //   console.log('next level');  
-  //   obs_count = obs_count + 5;
-  //   Start();
-  //   popup.hide();
-  //   startTimer(play_time); // 타임 오버 렉 걸림
-  //   ground.gameGround.addEventListener('click', ground.onGroundClick);
-  //   // gameGround.addEventListener('click', onGroundClick);
-  // }
-  
   Finish(win){
-    this.ground.deleteEvent();
+    this.ground.deleteEvent(true);
+    this.hideFooterbtn();
     if(win){
       this.showFooterbtn('level 2')
     }else{

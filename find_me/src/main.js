@@ -2,16 +2,15 @@
 
 import PopUp from './popup.js';
 import GameBuilder from './game.js';
-
 import * as sound from './sound.js';
 import { Reason } from './game.js';
 
 
 // 어떤 값을 설정하는지 한 눈에 알아보기 쉬움
 const playGame = new GameBuilder()
-.playtime(3)
-.wallycount(2)
-.waldocount(1)
+.playtime(5)
+.wallycount(3)
+.waldocount(2)
 .obscount(5)
 .build();
 
@@ -43,6 +42,9 @@ playGame.setGameStopListener((reason) => {
 popup.setClickListener(() => {
   playGame.Start();
 });
+popup.setResetartListener(() => {
+    playGame.reStart();
+})
 
 
 

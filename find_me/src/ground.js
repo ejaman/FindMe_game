@@ -31,8 +31,13 @@ play (){
   this.createImg('wally', this.wally_count, 'img/wally_c1.png');
   this.createImg('waldo', this.waldo_count, 'img/wally_c2.png');
 }
-deleteEvent(){
-  this.gameGround.removeEventListener('click', this.onGroundClick);
+deleteEvent(d){
+  if(d){
+      this.gameGround.removeEventListener('click', this.onGroundClick);
+  }else{
+    this.gameGround.addEventListener('click', this.onGroundClick);
+  }
+
 }
 // 콜백 등록할 수 있도록
 setClickListener(onItemClick) {
