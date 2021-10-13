@@ -2,18 +2,20 @@
 // 본 게임 실행, 레벨 설정도 여기서!
 
 import Ground from "./ground.js";
+import * as sound from './sound.js';
 import { ItemType } from "./ground.js";
 
 export const Reason = Object.freeze({
   win: 'win',
   lose: 'lose',
-  stop: 'stop'
+  stop: 'stop',
+  timeout : 'timeout'
 });
 
 //bulider pattern
 export default class GameBuilder {
-  playtime(playtime) {
-    this.playtime = this.playtime;
+  playtime(time) {
+    this.playtime = time;
     return this;
   }
   wallycount(num) {
@@ -56,7 +58,6 @@ class Game{
 
     // 시작 버튼
     this.startBtn.addEventListener('click', () => {
-      console.log('start');
       this.Start();
     });
     // 멈춤 버튼
@@ -82,10 +83,13 @@ class Game{
   }
 
   Start(){
-    // play();
+    sound.playBg();
     this.ground.play();
     this.showFooterbtn('stop');
     this.startTimer(this.play_time);
+    this.score = 0;
+    this.leftBoard.innerHTML = this.waldo_count + this.wally_count;
+    this.ground.play();
   }
   
   Stop(reason){
@@ -97,48 +101,35 @@ class Game{
   onItemClick = (item) =>{
     if(item === ItemType.waldo){
       this.score++;
-      this.timer_scoreText();
+      this.score_Text();
       if( this.score === this.waldo_count + this.wally_count){
-        console.log('win');
         this.Stop(Reason.win);
+        this.Finish(true);
+        sound.stopBg();
       }
     }else if(item === ItemType.dog){
-      console.log('dog lose');
+      sound.stopBg();
       this.Stop(Reason.lose);
+      this.Finish(false);
     }else if(item === ItemType.wiz){
-      console.log('wiz lose');
+      sound.stopBg();
       this.Stop(Reason.lose);
+      this.Finish(false);
     }
   }
 
-
-  Finish(win){
-    if(win){
-      // popup.show('💃축하합니다🕺');
-      this.showFooterbtn('level 2')
-    }else{
-      // popup.show('💩재도전?💩');
-    }
-    this.stopTimer();
-    this.ground.gameGround.removeEventListener('click', ground.onGroundClick);
-    // gameGround.removeEventListener('click', onGroundClick);
-  }
-  
   startTimer(playtime){
     this.showunit();
-    // sound.playBg();
     this.timerBoard.innerHTML =`${playtime}`;
     this.timer = setInterval(() => {
       if(playtime <= 0){
-        clearInterval(timer);
-        // popup.show('Time over!');// check!
-        // sound.stopBg();
-        // sound.playLose();
-        this.ground.gameGround.removeEventListener('click', ground.onGroundClick);
+        clearInterval(this.timer);
+        this.Stop(Reason.timeout);
+        // this.ground.gameGround.removeEventListener('click', ground.onGroundClick);
         // gameGround.removeEventListener('click', onGroundClick);
         return;
       }
-      this.timer_scoreText(--playtime);
+      this.timer_Text(--playtime);
     },1000);
   }
   // stringToInt(s){   =>ground????
@@ -149,11 +140,15 @@ class Game{
     clearInterval(this.timer);
   }
 
-  timer_scoreText(sec) { 
-    this.timerBoard.innerHTML =`${this.sec}`;
-    this.scoreBoard.innerHTML = `${this.score } 점`;
+  timer_Text(sec) { 
+    this.timerBoard.innerHTML =`${sec}`;
+  }
+
+  score_Text() { 
+    this.scoreBoard.innerHTML = `${this.score} 점`;
     this.leftBoard.innerHTML = `${this.waldo_count + this.wally_count - this.score}`
   }
+  
   
   // nextlevel(){
   //   console.log('next level');  
@@ -165,9 +160,18 @@ class Game{
   //   // gameGround.addEventListener('click', onGroundClick);
   // }
   
+  Finish(win){
+    this.ground.deleteEvent();
+    if(win){
+      this.showFooterbtn('level 2')
+    }else{
+    }
+    this.stopTimer();
+  }
+
   // 게임이 시작하면서 아래의 버튼을 보여줌
   showFooterbtn(footertext){
-    this.footerBtn.innerHTML = footertext;
+    this.footerBtn.innerHTML = `${footertext}`;
     this.ground.gameGround.scrollIntoView({behavior:"smooth", block: "center"});
     this.footerBtn.classList.remove('hide--footer');
   }

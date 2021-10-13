@@ -20,27 +20,26 @@ export default class Ground{
     this.groundRect = this.gameGround.getBoundingClientRect();
 
     // 이미지 클릭
-this.gameGround.addEventListener('click', this.onGroundClick);
+  this.gameGround.addEventListener('click', this.onGroundClick);
   }
 
 // 게임이 실행되는 함수
 play (){
   this.gameGround.innerHTML = '';
-  // score = 0;
-  // leftBoard.innerHTML = waldo_count + wally_count;
-  // scoreBoard.innerHTML = '0 점'
   this.createImg('dog', this.obs_count, 'img/dog.png');
   this.createImg('wiz', this.obs_count, 'img/wiz.png');
   this.createImg('wally', this.wally_count, 'img/wally_c1.png');
   this.createImg('waldo', this.waldo_count, 'img/wally_c2.png');
+}
+deleteEvent(){
+  this.gameGround.removeEventListener('click', this.onGroundClick);
 }
 // 콜백 등록할 수 있도록
 setClickListener(onItemClick) {
   this.onItemClick = onItemClick;
 }
   // img를 만드는 함수
-createImg (className, num, path) {
-  console.log('create img');  
+createImg (className, num, path) { 
   const x1 = 0;
   const y1 = 0;
   const x2 = this.groundRect.width -img_size;
@@ -53,7 +52,6 @@ createImg (className, num, path) {
     img.style.position = 'absolute'; 
     const x = randomPosition(x1, x2);
     const y = randomPosition(y1, y2);
-    console.log(x1, y1);
     img.style.left =`${x}px`;
     img.style.top =`${y}px`;
     this.gameGround.appendChild(img);
@@ -65,26 +63,12 @@ onGroundClick = (event) => {
   if(target.matches('.wally') || target.matches('.waldo')){
     sound.playClick();
     target.remove();
-    console.log('waldo!');
     this.onItemClick && this.onItemClick(ItemType.waldo);
-    // score++;
-    // scoreText();
-    // sound.playClick();
-    // if(score === waldo_count + wally_count){
-    //   Finish(true);
-    //   sound.stopBg();
-    //   sound.playWin();
-    // }
   } else if ( target.matches('.dog')){
-    console.log('dog!')
     sound.playDog();
     this.onItemClick && this.onItemClick(ItemType.dog);
-    // Finish(false);
-    // sound.stopBg();
-    // sound.playDog();
   } else if (target.matches('.wiz')){
     sound.playLose();
-    console.log('wiz!')
     this.onItemClick && this.onItemClick(ItemType.wiz);
   }
 }

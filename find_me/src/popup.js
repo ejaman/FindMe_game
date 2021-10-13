@@ -1,4 +1,5 @@
 'use strict';
+import Game from './game.js';
 
 export default class PopUp {
   constructor(){
@@ -24,12 +25,13 @@ export default class PopUp {
     show(text){
       this.msg.innerHTML = text;
       this.popUp.classList.remove('popup--hide');
-      // hideFooterbtn();
-      // if(text === '다시 시작? 돌아가기?'){
-      //   showresumeBtn(true);
-      // }else{
-      //   showresumeBtn(false);
-      // }
+
+      hideFooterbtn();
+      if(text === '다시 시작? 돌아가기?'){
+        showresumeBtn(true);
+      }else{
+        showresumeBtn(false);
+      }
     }
     hide(){
       this.popUp.classList.add('popup--hide');

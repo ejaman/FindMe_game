@@ -31,6 +31,9 @@ playGame.setGameStopListener((reason) => {
     case Reason.lose:
       message = '💩재도전?💩';
       break;
+    case Reason.timeout:
+      message = '⏰TimeOut!⏰';
+      break;
     default:
       throw new Error('not valid reason');
   }
@@ -38,8 +41,7 @@ playGame.setGameStopListener((reason) => {
 });
 
 popup.setClickListener(() => {
-  // playGame.Start();
-  sound
+  playGame.Start();
 });
 
 
