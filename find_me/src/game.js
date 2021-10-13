@@ -93,11 +93,9 @@ class Game{
   }
   // 잠시 멈춤
   reStart(){
-    // 에러 발견 멈추고 그자리 다시시작인데 점수랑 남은 갯수는 초기화 돼 있음
     sound.playBg();
     this.startTimer(this.stringToInt(this.timerBoard.innerHTML));
     this.ground.deleteEvent(false);
-    this.score = 0;
   }   
   Stop(reason){
     sound.stopBg();
