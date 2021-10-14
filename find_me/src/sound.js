@@ -1,6 +1,8 @@
 'use strict';
 // 소리 담당
 const Bg1 = new Audio('./sound/level1.mp3');
+const Bg2 = new Audio('./sound/level2.mp3');
+const Bg3 = new Audio('./sound/level3.mp3');
 const win = new Audio('./sound/game_win.mp3');
 const lose = new Audio('./sound/bug.mp3');
 const dog = new Audio('./sound/dog.mp3');
@@ -10,6 +12,12 @@ const time = new Audio('./sound/time.mp3');
 
 export function playBg() {
   Sound(Bg1);
+}
+export function playBg2() {
+  Sound(Bg2);
+}
+export function playBg3() {
+  Sound(Bg3);
 }
 export function playWin() {
   Sound(win);
@@ -31,6 +39,8 @@ export function playTime() {
 }
 export function stopBg() {
   stopSound(Bg1);
+  stopSound(Bg2);
+  stopSound(Bg3);
 }
 
 function Sound(sound){

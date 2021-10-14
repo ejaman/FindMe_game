@@ -8,9 +8,9 @@ import GameBuilder, { Reason } from './game.js';
 // 어떤 값을 설정하는지 한 눈에 알아보기 쉬움
 const playGame = new GameBuilder()
 .playtime(5)
-.wallycount(2)
-.waldocount(1)
-.obscount(1)
+.wallycount(3)
+.waldocount(2)
+.obscount(5)
 .build();
 
 const popup = new PopUp();
@@ -32,6 +32,10 @@ playGame.setGameStopListener((reason) => {
     case Reason.timeout:
       message = '⏰TimeOut!⏰';
       sound.playTime();
+      break;
+    case Reason.clear:
+      message = '🏅All Clear🏅';
+      sound.playWin();
       break;
     default:
       throw new Error('not valid reason');

@@ -34,18 +34,21 @@ play (){
 play2 (){
   console.log('play 2')
   this.gameGround.innerHTML = '';
-  // 숫자 늘릴 방법 찾아보기
+  // 숫자 늘릴 방법 찾아보기  
+  this._createImg('wally', this.wally_count +2, 'img/wally_c1.png');
+  this._createImg('dog', this.obs_count, 'img/dog.png');
   this._createImg('wiz', this.obs_count + 3, 'img/wiz.png');
-  this._createImg('wally', this.wally_count, 'img/wally_c1.png');
-  this._createImg('waldo', this.waldo_count, 'img/wally_c2.png');
+  this._createImg('waldo', this.waldo_count +1, 'img/wally_c2.png');
 }
 play3 (){
   console.log('play 3')
   this.gameGround.innerHTML = '';
   // 숫자 늘릴 방법 찾아보기
-  this._createImg('wiz', this.obs_count + 5, 'img/badguy.png');
-  this._createImg('wally', this.wally_count, 'img/wally_c1.png');
-  this._createImg('waldo', this.waldo_count, 'img/wally_c2.png');
+  this._createImg('wiz', this.obs_count + 3, 'img/wiz.png');  
+  this._createImg('bad', this.obs_count + 5, 'img/badguy.png');
+  this._createImg('wally', this.wally_count +2, 'img/wally_c1.png');
+  this._createImg('dog', this.obs_count, 'img/dog.png');
+  this._createImg('waldo', this.waldo_count+3, 'img/wally_c2.png');
 
 }
 

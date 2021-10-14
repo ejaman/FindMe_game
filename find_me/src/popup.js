@@ -46,4 +46,5 @@ export default class PopUp {
         this.resumeBtn.classList.add('hide--resume');
       }
     }
+
 }

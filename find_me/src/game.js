@@ -9,7 +9,8 @@ export const Reason = Object.freeze({
   win: 'win',
   lose: 'lose',
   stop: 'stop',
-  timeout : 'timeout'
+  timeout : 'timeout',
+  clear: 'clear'
 });
 
 //bulider pattern
@@ -42,10 +43,12 @@ export default class GameBuilder {
 
 export class Game{
   constructor(playtime, wallycount, waldocount, obscount){
+    this.i = 0;
     this.wally_count = wallycount;
     this.waldo_count = waldocount;
     this.obs_count = obscount;
     this.play_time =  playtime;
+    this.check = this.wally_count + this.waldo_count + this.i;
 
     this.startBtn = document.querySelector('.start-btn');
     this.footerBtn = document.querySelector('.footer-btn');
@@ -84,29 +87,31 @@ export class Game{
   }
 
   Start(){      
-    sound.playBg();
     this.ground.deleteEvent(false); 
     this.showFooterbtn('stop'); 
     this.score = 0;
     this.scoreBoard.innerHTML = '0 점';
-    this.leftBoard.innerHTML = this.waldo_count + this.wally_count;
-    
+    this.showLevel(`level ${this.lev}`);
+    this.leftBoard.innerHTML = '';
     if(this.lev === 1){
+      sound.playBg();
       this.startTimer(this.play_time);   
       this.ground.play();
     }else if(this.lev === 2){
-      this.startTimer(this.play_time + 5);   
+      this.i = 3;
+      this.startTimer(this.play_time + 3);
+      sound.playBg2();   
       this.pop.hide();
       this.ground.play2();
-      this.showLevel('level 2')
     }else if(this.lev === 3){
-      this.startTimer(this.play_time + 10);   
+      this.i = 5;
+      sound.playBg3();
+      this.startTimer(this.play_time + 5);   
       console.log('last level'); 
       this.pop.hide();
       this.ground.play3();
-      this.showLevel('level 3')
-    }
-
+    } 
+    
   }
 
   // 잠시 멈춤
@@ -122,15 +127,22 @@ export class Game{
     this.onGameStop && this.onGameStop(reason); 
   }
 
+  score_Text() { 
+    this.scoreBoard.innerHTML = `${this.score} 점`;
+    this.leftBoard.innerHTML = `${this.waldo_count + this.wally_count +this.i - this.score} 개`
+  }
 
   onItemClick = (item) =>{
     if(item === ItemType.waldo){
       this.score++;
       this.score_Text();
-      if( this.score === this.waldo_count + this.wally_count){
+      if( this.score === this.i + this.waldo_count + this.wally_count){
         this.Stop(Reason.win);
         this.Finish(true);
-        sound.stopBg();
+        sound.stopBg();   
+        if(this.lev === 3){
+          this.Stop(Reason.clear);
+        }
       }
     }else if(item === ItemType.dog){
       sound.stopBg();
@@ -141,7 +153,7 @@ export class Game{
       this.Stop(Reason.lose);
       this.Finish(false);
     }
-  }
+}
 
   startTimer(playtime){
     this.showunit();
@@ -169,17 +181,15 @@ export class Game{
   timer_Text(sec) { 
     this.timerBoard.innerHTML =`${sec}`;
   }
-
-  score_Text() { 
-    this.scoreBoard.innerHTML = `${this.score} 점`;
-    this.leftBoard.innerHTML = `${this.waldo_count + this.wally_count - this.score}`
-  }
   
   Finish(win){
     this.ground.deleteEvent(true);
     this.hideFooterbtn();
     if(win){
       this.showFooterbtn('next level')
+      if(this.lev === 3){
+        this.hideFooterbtn();
+      }
     }else{
     }
     this.stopTimer();   
