@@ -55,7 +55,13 @@ export class Game{
     this.scoreBoard = document.querySelector('.score');
     this.leftBoard = document.querySelector('.left');  
     this.Unit = document.querySelector('.unit');
-    // this.level = document.querySelector('p');
+
+    this.ground = new Ground(wallycount, waldocount, obscount);
+    this.pop = new PopUp();
+    this.ground.setClickListener(this.onItemClick);
+    this.score = 0;
+    this.lev = 1;
+    this.timer = undefined;
 
     // 시작 버튼
     this.startBtn.addEventListener('click', () => {
@@ -67,47 +73,42 @@ export class Game{
       if(this.footerBtn.innerHTML === 'stop'){
         this.Stop(Reason.stop);
       }else if(this.footerBtn.innerHTML === 'next level'){
-        this.level2();
+        this.lev += 1;
+        this.Start();
       }
     });
 
-    this.ground = new Ground(wallycount, waldocount, obscount);
-    this.pop = new PopUp();
-    this.ground.setClickListener(this.onItemClick);
-    this.score = 0;
-    this.timer = undefined;
   }
   setGameStopListener(onGameStop){
     this.onGameStop = onGameStop;
   }
 
-  Start(){
-    this.ground.play();
-    this.Set();
-  }
-  level2(){
-    console.log('next level'); 
-    this.pop.hide();
-    this.ground.play2();
-    this.Set();
-    this.showLevel('level 2')
-    }
-  level3(){
-    console.log('last level'); 
-    this.pop.hide();
-    this.ground.play3();
-    this.Set();
-    this.showLevel('level 3')
-  }
-  Set(){
+  Start(){      
     sound.playBg();
     this.ground.deleteEvent(false); 
-    this.showFooterbtn('stop');
-    this.startTimer(this.play_time);    
+    this.showFooterbtn('stop'); 
     this.score = 0;
     this.scoreBoard.innerHTML = '0 점';
     this.leftBoard.innerHTML = this.waldo_count + this.wally_count;
+    
+    if(this.lev === 1){
+      this.startTimer(this.play_time);   
+      this.ground.play();
+    }else if(this.lev === 2){
+      this.startTimer(this.play_time + 5);   
+      this.pop.hide();
+      this.ground.play2();
+      this.showLevel('level 2')
+    }else if(this.lev === 3){
+      this.startTimer(this.play_time + 10);   
+      console.log('last level'); 
+      this.pop.hide();
+      this.ground.play3();
+      this.showLevel('level 3')
+    }
+
   }
+
   // 잠시 멈춤
   reStart(){
     sound.playBg();
@@ -181,7 +182,7 @@ export class Game{
       this.showFooterbtn('next level')
     }else{
     }
-    this.stopTimer();
+    this.stopTimer();   
   }
   showLevel(lev){
     this.level.innerHTML = lev;

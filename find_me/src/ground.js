@@ -33,6 +33,7 @@ play (){
 }
 play2 (){
   console.log('play 2')
+  this.gameGround.innerHTML = '';
   // 숫자 늘릴 방법 찾아보기
   this._createImg('wiz', this.obs_count + 3, 'img/wiz.png');
   this._createImg('wally', this.wally_count, 'img/wally_c1.png');
@@ -40,6 +41,7 @@ play2 (){
 }
 play3 (){
   console.log('play 3')
+  this.gameGround.innerHTML = '';
   // 숫자 늘릴 방법 찾아보기
   this._createImg('wiz', this.obs_count + 5, 'img/badguy.png');
   this._createImg('wally', this.wally_count, 'img/wally_c1.png');
