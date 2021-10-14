@@ -16,6 +16,7 @@ export default class Ground{
     this.waldo_count = waldo_count;
     this.obs_count = obs_count;
 
+    this.dog = document.querySelector('.dog');
     this.gameGround = document.querySelector('.ground');
     this.groundRect = this.gameGround.getBoundingClientRect();
 
@@ -26,11 +27,26 @@ export default class Ground{
 // 게임이 실행되는 함수
 play (){
   this.gameGround.innerHTML = '';
-  this.createImg('dog', this.obs_count, 'img/dog.png');
-  this.createImg('wiz', this.obs_count, 'img/wiz.png');
-  this.createImg('wally', this.wally_count, 'img/wally_c1.png');
-  this.createImg('waldo', this.waldo_count, 'img/wally_c2.png');
+  this._createImg('dog', this.obs_count, 'img/dog.png');
+  this._createImg('wally', this.wally_count, 'img/wally_c1.png');
+  this._createImg('waldo', this.waldo_count, 'img/wally_c2.png');
 }
+play2 (){
+  console.log('play 2')
+  // 숫자 늘릴 방법 찾아보기
+  this._createImg('wiz', this.obs_count + 3, 'img/wiz.png');
+  this._createImg('wally', this.wally_count, 'img/wally_c1.png');
+  this._createImg('waldo', this.waldo_count, 'img/wally_c2.png');
+}
+play3 (){
+  console.log('play 3')
+  // 숫자 늘릴 방법 찾아보기
+  this._createImg('wiz', this.obs_count + 5, 'img/badguy.png');
+  this._createImg('wally', this.wally_count, 'img/wally_c1.png');
+  this._createImg('waldo', this.waldo_count, 'img/wally_c2.png');
+
+}
+
 deleteEvent(d){
   if(d){
       this.gameGround.removeEventListener('click', this.onGroundClick);
@@ -44,7 +60,7 @@ setClickListener(onItemClick) {
   this.onItemClick = onItemClick;
 }
   // img를 만드는 함수
-createImg (className, num, path) { 
+_createImg (className, num, path) { 
   const x1 = 0;
   const y1 = 0;
   const x2 = this.groundRect.width -img_size;
@@ -60,7 +76,9 @@ createImg (className, num, path) {
     img.style.left =`${x}px`;
     img.style.top =`${y}px`;
     this.gameGround.appendChild(img);
-  }
+    // img.style.animationName = 'slidein';
+  }    
+
 } 
 
 onGroundClick = (event) => {

@@ -40,7 +40,7 @@ export default class GameBuilder {
   }
 }
 
-class Game{
+export class Game{
   constructor(playtime, wallycount, waldocount, obscount){
     this.wally_count = wallycount;
     this.waldo_count = waldocount;
@@ -50,6 +50,7 @@ class Game{
     this.startBtn = document.querySelector('.start-btn');
     this.footerBtn = document.querySelector('.footer-btn');
     this.timerBoard = document.querySelector('.timer');
+    this.level = document.querySelector('.level');
   
     this.scoreBoard = document.querySelector('.score');
     this.leftBoard = document.querySelector('.left');  
@@ -65,7 +66,7 @@ class Game{
       sound.playClick();
       if(this.footerBtn.innerHTML === 'stop'){
         this.Stop(Reason.stop);
-      }else if(this.footerBtn.innerHTML === 'level 2'){
+      }else if(this.footerBtn.innerHTML === 'next level'){
         this.level2();
       }
     });
@@ -76,17 +77,33 @@ class Game{
     this.score = 0;
     this.timer = undefined;
   }
-
   setGameStopListener(onGameStop){
     this.onGameStop = onGameStop;
   }
 
   Start(){
-    sound.playBg();
-    this.ground.deleteEvent(false);
     this.ground.play();
+    this.Set();
+  }
+  level2(){
+    console.log('next level'); 
+    this.pop.hide();
+    this.ground.play2();
+    this.Set();
+    this.showLevel('level 2')
+    }
+  level3(){
+    console.log('last level'); 
+    this.pop.hide();
+    this.ground.play3();
+    this.Set();
+    this.showLevel('level 3')
+  }
+  Set(){
+    sound.playBg();
+    this.ground.deleteEvent(false); 
     this.showFooterbtn('stop');
-    this.startTimer(this.play_time);
+    this.startTimer(this.play_time);    
     this.score = 0;
     this.scoreBoard.innerHTML = '0 점';
     this.leftBoard.innerHTML = this.waldo_count + this.wally_count;
@@ -104,16 +121,6 @@ class Game{
     this.onGameStop && this.onGameStop(reason); 
   }
 
-  level2(){
-  console.log('next level');  
-  this.pop.hide();
-
-  // 팝업이 안보여야함 ✅ 
-  // 누르면 다시 시작되어야함 
-  // 누르면 장애물과 윌리의 숫자가 늘어나야함
-  // 누르면 이미지가 움직여야함
-  // 누르면 버튼 메시지가 바뀌어야함
-  }
 
   onItemClick = (item) =>{
     if(item === ItemType.waldo){
@@ -171,12 +178,14 @@ class Game{
     this.ground.deleteEvent(true);
     this.hideFooterbtn();
     if(win){
-      this.showFooterbtn('level 2')
+      this.showFooterbtn('next level')
     }else{
     }
     this.stopTimer();
   }
-
+  showLevel(lev){
+    this.level.innerHTML = lev;
+  }
   // 게임이 시작하면서 아래의 버튼을 보여줌
   showFooterbtn(footertext){
     this.footerBtn.innerHTML = `${footertext}`;

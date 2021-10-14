@@ -1,9 +1,8 @@
 'use strict';
 
 import PopUp from './popup.js';
-import GameBuilder from './game.js';
 import * as sound from './sound.js';
-import { Reason } from './game.js';
+import GameBuilder, { Reason } from './game.js';
 
 
 // 어떤 값을 설정하는지 한 눈에 알아보기 쉬움
@@ -39,7 +38,6 @@ playGame.setGameStopListener((reason) => {
   }
   popup.show(message);
 });
-
 popup.setClickListener(() => {
   playGame.Start();
 });
