@@ -49,3 +49,5 @@ after: the pop-up appears and the character cannot be clicked.)
 
  공부하는 김에 새로 만들어본거라 시간도 생각보다 오래걸렸고 어려웠지만 완성해서 뿌듯했습니다.<br />
  수정한 점은 세세하게 적어봤고 혹시나 제 코드를 보시고 수정할 부분이나 렉을 발견하신다면 알려주세요.
+ 
+ <br /><br /><br />
