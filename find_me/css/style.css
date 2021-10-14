@@ -11,6 +11,8 @@ button:hover {
 }
 
 body {
+  user-select: none;
+  cursor: auto;
   background-color: #5f6e8d;
   text-align: center;
   font-family: "Jua", sans-serif;
