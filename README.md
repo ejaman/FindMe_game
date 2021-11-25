@@ -1,18 +1,6 @@
 # FindMe_game
 브라우저101 참조(https://github.com/ejaman/Browser_101) 윌리를 찾아라 게임
-<br /><br /><br />
-## 기존 게임 기능
-<img width="948" alt="136240911-1c140cba-004c-4294-808f-9b12db910a98" src="https://user-images.githubusercontent.com/82802784/137343165-efafcf4b-8599-4907-8c94-7d7650493704.png">
 
-+  시간내에 벌레를 피해 당근을 다 뽑으면 이기는 게임 (win if you click all the carrots while avoiding the bugs)
-+  당근 클릭시 당근이 사라지며 남은 당근 갯수가 내려감 (When you click the carrot, the carrot disappears and the number of remaining carrots decreases)
-+  벌레를 클릭하거나 시간이 다되면 게임에서 지게 됨 (If you click the bug or run out of time, you lose the game)
-+  중지 버튼을 통해 게임을 다시 시작할 수 있음 (If you want to start over click stop -> refresh button)
-+  당근과 벌레의 위치는 무작위로 지정 (Items are randomly positioned)
-+  버튼은 폰트어썸의 아이콘을 사용해서 만듦 (use fontawesome)
-
-
-<br /><br /><br />
 ## Find me!
 <img width="1374" alt="스크린샷 2021-10-14 오후 11 37 06" src="https://user-images.githubusercontent.com/82802784/137339779-3a8ebe97-43bc-4ad9-bae6-cc726b68235f.png">
 
@@ -66,6 +54,18 @@ after: the pop-up appears and the character cannot be clicked.)
  레벨 별 다른 수의 윌리를 주고싶어 play 함수로 만들것을 시도해봤지만 실패해서 그냥 숫자를 더하는 방식으로 만듦
  
  
- 
+ <br /><br /><br />
+## 기존 게임 기능
+<img width="948" alt="136240911-1c140cba-004c-4294-808f-9b12db910a98" src="https://user-images.githubusercontent.com/82802784/137343165-efafcf4b-8599-4907-8c94-7d7650493704.png">
+
++  시간내에 벌레를 피해 당근을 다 뽑으면 이기는 게임 (win if you click all the carrots while avoiding the bugs)
++  당근 클릭시 당근이 사라지며 남은 당근 갯수가 내려감 (When you click the carrot, the carrot disappears and the number of remaining carrots decreases)
++  벌레를 클릭하거나 시간이 다되면 게임에서 지게 됨 (If you click the bug or run out of time, you lose the game)
++  중지 버튼을 통해 게임을 다시 시작할 수 있음 (If you want to start over click stop -> refresh button)
++  당근과 벌레의 위치는 무작위로 지정 (Items are randomly positioned)
++  버튼은 폰트어썸의 아이콘을 사용해서 만듦 (use fontawesome)
+
+
+<br /><br /><br />
  
  <br /><br /><br />
