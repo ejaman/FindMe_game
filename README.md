@@ -1,4 +1,4 @@
-# FindMe_game
+# where's wally game
 브라우저101 참조(https://github.com/ejaman/Browser_101) 윌리를 찾아라 게임
 
 ## Find me!
