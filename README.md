@@ -1,14 +1,13 @@
 # where's wally game
-브라우저101 참조(https://github.com/ejaman/Browser_101) 윌리를 찾아라 게임
 
-## Find me!
+
 <img width="1374" alt="스크린샷 2021-10-14 오후 11 37 06" src="https://user-images.githubusercontent.com/82802784/137339779-3a8ebe97-43bc-4ad9-bae6-cc726b68235f.png">
 
 🔗링크: https://ejaman.github.io/FindMe_game/find_me/
 
 
 
-바뀐 점
+
 1. 레벨 추가(add level)
 + 레벨 별 다른 배경음 추가(Add background sound for each level)
 + 레벨이 올라갈 수록 시간과 캐릭터 수가 증가(As the level goes up, the time and number of characters increase)
@@ -28,15 +27,14 @@
 (before: after the game was completed and a pop-up appeared, user still can click the character, and the game result changed accordingly, 
 after: the pop-up appears and the character cannot be clicked.)
  
-로고 옆 캐릭터에 깃허브 링크도 연결했어요!
+로고 옆 캐릭터에 깃허브 링크도 연결!
 (You can view my GitHub by clicking the character next to find me!)
  
 <br /><br /><br />
  
  ## 소감
 
- 공부하는 김에 새로 만들어본거라 시간도 생각보다 오래걸렸고 어려웠지만 완성해서 뿌듯했습니다.<br />
- 수정한 점은 세세하게 적어봤고 혹시나 제 코드를 보시고 수정할 부분이나 렉을 발견하신다면 알려주세요!
+ 공부하는 김에 새로 만들어본거라 시간도 생각보다 오래걸렸고 어려웠지만 완성해서 뿌듯했다.<br />
  
  
  어려웠던 부분
@@ -55,7 +53,7 @@ after: the pop-up appears and the character cannot be clicked.)
  
  
  <br /><br /><br />
-## 기존 게임 기능
+## 참조
 <img width="948" alt="136240911-1c140cba-004c-4294-808f-9b12db910a98" src="https://user-images.githubusercontent.com/82802784/137343165-efafcf4b-8599-4907-8c94-7d7650493704.png">
 
 +  시간내에 벌레를 피해 당근을 다 뽑으면 이기는 게임 (win if you click all the carrots while avoiding the bugs)
