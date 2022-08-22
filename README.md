@@ -3,7 +3,7 @@
 
 <img width="1374" alt="스크린샷 2021-10-14 오후 11 37 06" src="https://user-images.githubusercontent.com/82802784/137339779-3a8ebe97-43bc-4ad9-bae6-cc726b68235f.png">
 
-🔗링크: https://ejaman.github.io/FindMe_game/find_me/
+🔗링크: [게임 링크](https://ejaman.github.io/findWally/find_me/)
 
 
 
